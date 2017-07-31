@@ -1,0 +1,49 @@
+{
+  "name": "@urbica/pg-migrate",
+  "version": "0.1.0",
+  "description": "PostgreSQL migration tool",
+  "author": "Stepan Kuzmin <to.stepan.kuzmin@gmail.com> (stepankuzmin.ru)",
+  "license": "MIT",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/urbica/pg-migrate.git"
+  },
+  "scripts": {
+    "commit": "git-cz",
+    "lint": "eslint .",
+    "release": "standard-version",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "bin": {
+    "pg-migrate": "./index.js"
+  },
+  "engine-strict": true,
+  "engines": {
+    "node": ">=7.6.0"
+  },
+  "keywords": [
+    "postgres",
+    "postgresql",
+    "migration"
+  ],
+  "dependencies": {
+    "pg-monitor": "0.8.2",
+    "pg-native": "2.0.1",
+    "pg-promise": "6.3.6"
+  },
+  "devDependencies": {
+    "commitizen": "2.9.6",
+    "cz-conventional-changelog": "2.0.0",
+    "eslint": "4.3.0",
+    "eslint-config-airbnb-base": "11.3.1",
+    "eslint-plugin-import": "2.7.0",
+    "standard-version": "4.2.0",
+    "tape": "4.7.0"
+  }
+}
