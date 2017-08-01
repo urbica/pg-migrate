@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const path = require('path');
 const minimist = require('minimist');
 const pgMigrate = require('./pg-migrate');
