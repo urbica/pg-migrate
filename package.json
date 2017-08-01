@@ -4,7 +4,7 @@
   "description": "PostgreSQL migration tool",
   "author": "Stepan Kuzmin <to.stepan.kuzmin@gmail.com> (stepankuzmin.ru)",
   "license": "MIT",
-  "main": "index.js",
+  "main": "pg-migrate.js",
   "repository": {
     "type": "git",
     "url": "git://github.com/urbica/pg-migrate.git"
@@ -12,6 +12,7 @@
   "scripts": {
     "commit": "git-cz",
     "lint": "eslint .",
+    "docs": "documentation build pg-migrate.js -g --markdown-toc false -f md -o API.md",
     "release": "standard-version",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -33,6 +34,8 @@
     "migration"
   ],
   "dependencies": {
+    "documentation": "5.1.0",
+    "minimist": "1.2.0",
     "pg-monitor": "0.8.2",
     "pg-native": "2.0.1",
     "pg-promise": "6.3.6"
@@ -44,6 +47,6 @@
     "eslint-config-airbnb-base": "11.3.1",
     "eslint-plugin-import": "2.7.0",
     "standard-version": "4.2.0",
-    "tape": "4.7.0"
+    "tape": "4.8.0"
   }
 }

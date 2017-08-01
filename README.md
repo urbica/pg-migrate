@@ -1,21 +1,58 @@
-# Urbica pg-migrate
+# Urbica PG Migrate
+
+PostgreSQL migration tool.
 
 ## Installation
 
-pg-migrate requires node v7.6.0 or higher for ES2015 and async function support.
+`pg-migrate` requires node v7.6.0 or higher for ES2015 and async function support.
 
-    npm install -g @urbica/pg-migrate
+```shell
+npm install -g @urbica/pg-migrate
+```
 
 ...or build from source
 
-    git clone https://github.com/urbica/pg-migrate.git
-    cd pg-migrate
-    npm install
+```shell
+git clone https://github.com/urbica/pg-migrate.git
+cd pg-migrate
+npm install
+```
 
-## Create migration
+## Usage
 
-    touch migrations/$(date +%s)-migration.sql
+```shell
+Usage: pg-migrate [options]
 
-## Migrate
+where [options] is any of:
+  --database (PGDATABASE) - database to apply migrations (required)
+  --host (PGHOST) - database host (default: localhost)
+  --port (PGPORT) - database port (default: 5432)
+  --user (PGUSER) - database user
+  --password (PGPASSWORD) - database password
+  --schemaName - database migrations table schema (default: public)
+  --tableName - database migrations table name (default: migrations)
+  --migrationsDir - path to migrations dir (default: ./migrations)
+  --version - returns running version then exits
 
-    pg-migrate
+pg-migrate@0.1.0
+node@8.2.1
+```
+
+## Example
+
+Create and write migrations and then run them
+
+```shell
+touch migrations/$(date +%s)-migration_name.sql
+pg-migrate --database=test --migrationsDir=./migrations
+```
+
+## Node.js API
+
+```js
+const pgMigrate = require('@urbica/pg-migrate');
+
+pgMigrate({ database: 'test', migrationsDir: './migrations' });
+```
+
+See [API](https://github.com/urbica/pg-migrate/blob/master/API.md) for more info.
