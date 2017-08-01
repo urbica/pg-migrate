@@ -8,7 +8,6 @@ const { promisify } = require('util');
 
 const pgPromiseOptions = { capSQL: true, pgNative: true };
 const pgp = pgPromise(pgPromiseOptions);
-monitor.attach(pgPromiseOptions);
 
 const readDirAsync = promisify(fs.readdir);
 
@@ -80,6 +79,7 @@ function runMigrations(t, options) {
  * @param {string} [options.schemaName='public'] - database migrations table schema
  * @param {string} [options.tableName='migrations'] - database migrations table name
  * @param {string} [options.migrationsDir='./migrations'] - path to migrations dir
+ * @param {boolean} [options.attachMonitor=false] - attach [pg-monitor](https://github.com/vitaly-t/pg-monitor)
  * @returns {Promise}
  *
  * @example
@@ -88,6 +88,11 @@ function runMigrations(t, options) {
  */
 async function pgMigrate(options) {
   const { host, port, database, user, password } = options;
+
+  if (options.attachMonitor) {
+    monitor.attach(pgPromiseOptions);
+  }
+
   const db = pgp({ host, port, database, user, password });
 
   const schemaName = options.schemaName || 'public';

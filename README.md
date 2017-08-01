@@ -1,5 +1,7 @@
 # Urbica PG Migrate
 
+[![Build Status](https://travis-ci.org/urbica/pg-migrate.svg?branch=master)](https://travis-ci.org/urbica/pg-migrate)
+
 PostgreSQL migration tool.
 
 ## Installation
@@ -31,11 +33,9 @@ where [options] is any of:
   --password (PGPASSWORD) - database password
   --schemaName - database migrations table schema (default: public)
   --tableName - database migrations table name (default: migrations)
-  --migrationsDir - path to migrations dir (default: ./migrations)
+  --migrationsDir - path to migrations (default: ./migrations)
+  --attachMonitor - attach pg-monitor (default: true)
   --version - returns running version then exits
-
-pg-migrate@0.1.0
-node@8.2.1
 ```
 
 ## Example

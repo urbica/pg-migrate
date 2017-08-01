@@ -2,7 +2,7 @@
 
 ## pgMigrate
 
-[pg-migrate.js:89-113](https://github.com/urbica/pg-migrate/blob/ea15e9cfff2e6bf3865090d542b91601414d7bdf/pg-migrate.js#L89-L113 "Source code on GitHub")
+[pg-migrate.js:89-118](https://github.com/urbica/pg-migrate/blob/5cbb7911a7679f481eed904fb65bb3ed1850f8d3/pg-migrate.js#L89-L118 "Source code on GitHub")
 
 pgMigrate
 prepares database and applies migrations
@@ -18,6 +18,7 @@ prepares database and applies migrations
     -   `options.schemaName` **[string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** database migrations table schema (optional, default `'public'`)
     -   `options.tableName` **[string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** database migrations table name (optional, default `'migrations'`)
     -   `options.migrationsDir` **[string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)** path to migrations dir (optional, default `'./migrations'`)
+    -   `options.attachMonitor` **[boolean](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean)** attach [pg-monitor](https://github.com/vitaly-t/pg-monitor) (optional, default `false`)
 
 **Examples**
 

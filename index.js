@@ -1,3 +1,4 @@
+const path = require('path');
 const minimist = require('minimist');
 const pgMigrate = require('./pg-migrate');
 const packagejson = require('./package.json');
@@ -11,7 +12,8 @@ const config = minimist(process.argv.slice(2), {
     'password',
     'schemaName',
     'tableName',
-    'migrationsDir'
+    'migrationsDir',
+    'attachMonitor'
   ],
   alias: {
     h: 'help',
@@ -25,7 +27,8 @@ const config = minimist(process.argv.slice(2), {
     password: process.env.PGPASSWORD,
     schemaName: 'public',
     tableName: 'migrations',
-    migrationsDir: './migrations'
+    migrationsDir: './migrations',
+    attachMonitor: true
   }
 });
 
@@ -47,6 +50,7 @@ function printHelp() {
     --schemaName - database migrations table schema (default: ${config.schemaName})
     --tableName - database migrations table name (default: ${config.tableName})
     --migrationsDir - path to migrations (default: ${config.migrationsDir})
+    --attachMonitor - attach pg-monitor (default: ${config.attachMonitor})
     --version - returns running version then exits
 
   pg-migrate@${packagejson.version}
@@ -66,6 +70,14 @@ if (!config.database) {
   process.exit(-1);
 }
 
+let migrationsDir;
+const { root } = path.parse(config.migrationsDir);
+if (root === '/') {
+  migrationsDir = config.migrationsDir;
+} else {
+  migrationsDir = path.join(__dirname, config.migrationsDir);
+}
+
 const options = {
   host: config.host,
   port: config.port,
@@ -74,8 +86,10 @@ const options = {
   password: config.password,
   schemaName: config.schemaName,
   tableName: config.tableName,
-  migrationsDir: config.migrationsDir
+  attachMonitor: config.attachMonitor,
+  migrationsDir
 };
+
 async function main() {
   try {
     await pgMigrate(options);
