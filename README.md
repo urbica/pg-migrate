@@ -6,6 +6,8 @@
 
 PostgreSQL migration tool.
 
+![Screenshot](https://raw.githubusercontent.com/urbica/pg-migrate/master/screenshot.png)
+
 ## Installation
 
 `pg-migrate` requires node v7.6.0 or higher for ES2015 and async function support.
