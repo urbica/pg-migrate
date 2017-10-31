@@ -75,6 +75,7 @@ if (!config.database) {
 let migrationsDir;
 const { root } = path.parse(config.migrationsDir);
 if (root === '/') {
+  // eslint-disable-next-line
   migrationsDir = config.migrationsDir;
 } else {
   migrationsDir = path.join(__dirname, config.migrationsDir);

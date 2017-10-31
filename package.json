@@ -34,18 +34,18 @@
     "migration"
   ],
   "dependencies": {
-    "documentation": "5.1.0",
+    "documentation": "5.3.3",
     "minimist": "1.2.0",
-    "pg-monitor": "0.8.2",
-    "pg-native": "2.0.1",
-    "pg-promise": "6.3.6"
+    "pg-monitor": "0.8.3",
+    "pg-native": "2.2.0",
+    "pg-promise": "7.2.0"
   },
   "devDependencies": {
     "commitizen": "2.9.6",
-    "cz-conventional-changelog": "2.0.0",
-    "eslint": "4.3.0",
-    "eslint-config-airbnb-base": "11.3.1",
-    "eslint-plugin-import": "2.7.0",
+    "cz-conventional-changelog": "2.1.0",
+    "eslint": "4.10.0",
+    "eslint-config-airbnb-base": "12.1.0",
+    "eslint-plugin-import": "2.8.0",
     "standard-version": "4.2.0",
     "tape": "4.8.0"
   }

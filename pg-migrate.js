@@ -24,20 +24,21 @@ function createMigrationsTable(t, { schemaName, tableName }) {
       'CREATE TABLE ${schemaName~}.${tableName~} (id varchar, datetime timestamp with time zone)',
       { schemaName, tableName }
     );
-    const q2 = t2.none(
-      'CREATE UNIQUE INDEX ON ${schemaName~}.${tableName~} (id)',
-      { schemaName, tableName }
-    );
+    const q2 = t2.none('CREATE UNIQUE INDEX ON ${schemaName~}.${tableName~} (id)', {
+      schemaName,
+      tableName
+    });
 
     return t.batch([q1, q2]);
   });
 }
 
 function checkMigration(t, migrationId, { schemaName, tableName }) {
-  return t.oneOrNone(
-    'SELECT id FROM ${schemaName~}.${tableName~} WHERE id = ${migrationId}',
-    { migrationId, schemaName, tableName }
-  );
+  return t.oneOrNone('SELECT id FROM ${schemaName~}.${tableName~} WHERE id = ${migrationId}', {
+    migrationId,
+    schemaName,
+    tableName
+  });
 }
 
 async function migrate(options, index) {
@@ -100,8 +101,7 @@ async function pgMigrate(options) {
   const migrationsDir = options.migrationsDir || './migrations';
 
   const migrations = await readDirAsync(migrationsDir).then(paths =>
-    paths.map(migrationPath => path.join(migrationsDir, migrationPath))
-  );
+    paths.map(migrationPath => path.join(migrationsDir, migrationPath)));
 
   return db.tx(async (t) => {
     const tableExists = await checkMigrationsTable(t, {
