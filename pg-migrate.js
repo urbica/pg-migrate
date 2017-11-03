@@ -43,6 +43,7 @@ const readMigrations = migrationsDir =>
  * @example
  * const PgMigrate = require('@urbica/pg-migrate');
  * const pgMigrate = new PgMigrate({ database: 'test', migrationsDir: './migrations' });
+ *
  * pgMigrate
  *  .connect()
  *  .then(() => pgMigrate.migrate())
@@ -64,7 +65,6 @@ function PgMigrate(options) {
 }
 
 /**
- * connect
  * prepares database and reads migrations
  *
  * @returns {Promise}
@@ -103,7 +103,6 @@ PgMigrate.prototype.checkMigrationsTable = function checkMigrationsTable() {
 };
 
 /**
- * migrate
  * runs migrations
  *
  * @returns {Promise}
@@ -142,7 +141,6 @@ PgMigrate.prototype.migrate = function migrate() {
 };
 
 /**
- * rollback
  * rollbacks migrations
  *
  * @param {int} [limit=1] - number of migrations to rollback
@@ -182,7 +180,6 @@ PgMigrate.prototype.rollback = function rollback(limit = 1) {
 };
 
 /**
- * reset
  * rollbacks all migrations
  *
  * @returns {Promise}
@@ -219,7 +216,6 @@ PgMigrate.prototype.reset = function reset() {
 };
 
 /**
- * end
  * closes database connection
  *
  * @returns {Promise}

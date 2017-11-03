@@ -6,6 +6,8 @@
 
 PostgreSQL migration tool.
 
+[Documentation](https://urbica.github.io/pg-migrate/).
+
 ![Screenshot](https://raw.githubusercontent.com/urbica/pg-migrate/master/screenshot.png)
 
 ## Installation
@@ -79,4 +81,4 @@ async function migrate() {
 migrate();
 ```
 
-See [API](https://github.com/urbica/pg-migrate/blob/master/API.md) for more info.
+See [API](https://urbica.github.io/pg-migrate/) for more info.

@@ -12,9 +12,11 @@
   "scripts": {
     "commit": "git-cz",
     "lint": "eslint .",
-    "docs": "documentation build pg-migrate.js -g --markdown-toc false -f md -o API.md",
+    "docs": "documentation build pg-migrate.js -g -f html -o docs",
+    "docs:deploy": "gh-pages -m 'auto commit [ci skip]' -d docs",
     "release": "standard-version",
-    "test": "node test/index.js"
+    "test": "node test/index.js",
+    "postpublish": "npm run docs && npm run docs:deploy"
   },
   "config": {
     "commitizen": {
@@ -36,6 +38,7 @@
   "dependencies": {
     "documentation": "5.3.3",
     "dotenv": "4.0.0",
+    "gh-pages": "1.0.0",
     "minimist": "1.2.0",
     "pg-monitor": "0.8.3",
     "pg-native": "2.2.0",
