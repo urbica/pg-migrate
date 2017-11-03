@@ -64,8 +64,8 @@ function PgMigrate(options) {
 }
 
 /**
- * PgMigrate.connect
- * Prepares database and reads migrations
+ * connect
+ * prepares database and reads migrations
  *
  * @returns {Promise}
  *
@@ -103,10 +103,9 @@ PgMigrate.prototype.checkMigrationsTable = function checkMigrationsTable() {
 };
 
 /**
- * PgMigrate.migrate
+ * migrate
  * runs migrations
  *
- * @param {int} [limit=1] - number of migrations to rollback
  * @returns {Promise}
  *
  * @example
@@ -143,7 +142,7 @@ PgMigrate.prototype.migrate = function migrate() {
 };
 
 /**
- * PgMigrate.rollback
+ * rollback
  * rollbacks migrations
  *
  * @param {int} [limit=1] - number of migrations to rollback
@@ -183,7 +182,7 @@ PgMigrate.prototype.rollback = function rollback(limit = 1) {
 };
 
 /**
- * PgMigrate.reset
+ * reset
  * rollbacks all migrations
  *
  * @returns {Promise}
@@ -220,7 +219,7 @@ PgMigrate.prototype.reset = function reset() {
 };
 
 /**
- * PgMigrate.end
+ * end
  * closes database connection
  *
  * @returns {Promise}

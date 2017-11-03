@@ -2,7 +2,7 @@
 
 ## PgMigrate
 
-[pg-migrate.js:51-64](https://github.com/urbica/pg-migrate/blob/6fc45b5dc17221063e6dad1c5e3e6442661f3007/pg-migrate.js#L51-L64 "Source code on GitHub")
+[pg-migrate.js:51-64](https://github.com/urbica/pg-migrate/blob/dcca8310ccc74b442d0619a84bdb33e6dd4961d9/pg-migrate.js#L51-L64 "Source code on GitHub")
 
 PgMigrate
 
@@ -34,10 +34,10 @@ Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refe
 
 ### connect
 
-[pg-migrate.js:77-83](https://github.com/urbica/pg-migrate/blob/6fc45b5dc17221063e6dad1c5e3e6442661f3007/pg-migrate.js#L77-L83 "Source code on GitHub")
+[pg-migrate.js:77-83](https://github.com/urbica/pg-migrate/blob/dcca8310ccc74b442d0619a84bdb33e6dd4961d9/pg-migrate.js#L77-L83 "Source code on GitHub")
 
-PgMigrate.connect
-Prepares database and reads migrations
+connect
+prepares database and reads migrations
 
 **Examples**
 
@@ -51,14 +51,10 @@ Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refe
 
 ### migrate
 
-[pg-migrate.js:119-143](https://github.com/urbica/pg-migrate/blob/6fc45b5dc17221063e6dad1c5e3e6442661f3007/pg-migrate.js#L119-L143 "Source code on GitHub")
+[pg-migrate.js:118-142](https://github.com/urbica/pg-migrate/blob/dcca8310ccc74b442d0619a84bdb33e6dd4961d9/pg-migrate.js#L118-L142 "Source code on GitHub")
 
-PgMigrate.migrate
+migrate
 runs migrations
-
-**Parameters**
-
--   `limit` **int** number of migrations to rollback (optional, default `1`)
 
 **Examples**
 
@@ -74,9 +70,9 @@ Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refe
 
 ### rollback
 
-[pg-migrate.js:159-183](https://github.com/urbica/pg-migrate/blob/6fc45b5dc17221063e6dad1c5e3e6442661f3007/pg-migrate.js#L159-L183 "Source code on GitHub")
+[pg-migrate.js:158-182](https://github.com/urbica/pg-migrate/blob/dcca8310ccc74b442d0619a84bdb33e6dd4961d9/pg-migrate.js#L158-L182 "Source code on GitHub")
 
-PgMigrate.rollback
+rollback
 rollbacks migrations
 
 **Parameters**
@@ -97,9 +93,9 @@ Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refe
 
 ### reset
 
-[pg-migrate.js:198-220](https://github.com/urbica/pg-migrate/blob/6fc45b5dc17221063e6dad1c5e3e6442661f3007/pg-migrate.js#L198-L220 "Source code on GitHub")
+[pg-migrate.js:197-219](https://github.com/urbica/pg-migrate/blob/dcca8310ccc74b442d0619a84bdb33e6dd4961d9/pg-migrate.js#L197-L219 "Source code on GitHub")
 
-PgMigrate.reset
+reset
 rollbacks all migrations
 
 **Examples**
@@ -116,9 +112,9 @@ Returns **[Promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refe
 
 ### end
 
-[pg-migrate.js:235-237](https://github.com/urbica/pg-migrate/blob/6fc45b5dc17221063e6dad1c5e3e6442661f3007/pg-migrate.js#L235-L237 "Source code on GitHub")
+[pg-migrate.js:234-236](https://github.com/urbica/pg-migrate/blob/dcca8310ccc74b442d0619a84bdb33e6dd4961d9/pg-migrate.js#L234-L236 "Source code on GitHub")
 
-PgMigrate.end
+end
 closes database connection
 
 **Examples**
