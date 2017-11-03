@@ -47,16 +47,34 @@ where [options] is any of:
 Create and write migrations and then run them
 
 ```shell
-touch migrations/$(date +%s)-migration_name.sql
+touch migrations/$(date +%s)-migration_name.{up,down}.sql
 pg-migrate --database=test --migrationsDir=./migrations
 ```
 
 ## Node.js API
 
-```js
-const pgMigrate = require('@urbica/pg-migrate');
+Using Promises
 
-pgMigrate({ database: 'test', migrationsDir: './migrations' });
+```js
+const PgMigrate = require('@urbica/pg-migrate');
+const pgMigrate = new PgMigrate({ database: 'test', migrationsDir: './migrations' });
+
+pgMigrate
+ .connect()
+ .then(() => pgMigrate.migrate())
+ .then(() => pgMigrate.end());
+```
+
+...or using async/await
+
+```js
+const pgMigrate = new PgMigrate({ database, user, migrationsDir });
+
+async migrate() {
+  await pgMigrate.connect();
+  await pgMigrate.migrate();
+  await pgMigrate.end();
+}
 ```
 
 See [API](https://github.com/urbica/pg-migrate/blob/master/API.md) for more info.

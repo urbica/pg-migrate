@@ -10,66 +10,23 @@ const pgPromiseOptions = { capSQL: true, pgNative: true };
 const pgp = pgPromise(pgPromiseOptions);
 
 const readDirAsync = promisify(fs.readdir);
-
-function checkMigrationsTable(t, { schemaName, tableName }) {
-  return t.oneOrNone(
-    'SELECT table_name FROM information_schema.tables WHERE table_schema = ${schemaName} AND table_name = ${tableName}',
-    { schemaName, tableName }
-  );
-}
-
-function createMigrationsTable(t, { schemaName, tableName }) {
-  return t.tx('create-table', (t2) => {
-    const q1 = t2.none(
-      'CREATE TABLE ${schemaName~}.${tableName~} (id varchar, datetime timestamp with time zone)',
-      { schemaName, tableName }
-    );
-    const q2 = t2.none('CREATE UNIQUE INDEX ON ${schemaName~}.${tableName~} (id)', {
-      schemaName,
-      tableName
-    });
-
-    return t.batch([q1, q2]);
-  });
-}
-
-function checkMigration(t, migrationId, { schemaName, tableName }) {
-  return t.oneOrNone('SELECT id FROM ${schemaName~}.${tableName~} WHERE id = ${migrationId}', {
-    migrationId,
-    schemaName,
-    tableName
-  });
-}
-
-async function migrate(options, index) {
-  const { schemaName, tableName, migrations } = options;
-
-  if (index >= migrations.length) return undefined;
-  const migration = migrations[index];
-
-  const migrationId = path.parse(migration).name;
-  const exists = await checkMigration(this, migrationId, options);
-  if (!exists) {
-    const contents = new pgp.QueryFile(migration);
-    return this.batch([
-      this.query(contents),
-      this.query(
-        'INSERT INTO ${schemaName~}.${tableName~} (id, datetime) VALUES (${migrationId}, NOW())',
-        { migrationId, schemaName, tableName }
-      )
-    ]);
-  }
-
-  return this;
-}
-
-function runMigrations(t, options) {
-  return t.tx('migrate', t2 => t2.sequence(migrate.bind(t2, options)));
-}
+const readMigrations = migrationsDir =>
+  readDirAsync(migrationsDir).then(migrationPaths =>
+    migrationPaths.reduce((acc, migrationPath) => {
+      const matches = migrationPath.match(/^(\w*-\w*)\.(up|down)\.sql$/i);
+      if (matches) {
+        const [, name, action] = matches;
+        if (acc[name]) {
+          acc[name][action] = path.join(migrationsDir, migrationPath);
+        } else {
+          acc[name] = { [action]: path.join(migrationsDir, migrationPath) };
+        }
+      }
+      return acc;
+    }, {}));
 
 /**
- * pgMigrate
- * prepares database and applies migrations
+ * PgMigrate
  *
  * @param {Object} options object
  * @param {string} options.database - database to apply migrations
@@ -84,37 +41,199 @@ function runMigrations(t, options) {
  * @returns {Promise}
  *
  * @example
- * const pgMigrate = require('@urbica/pg-migrate');
- * pgMigrate({ database: 'test', migrationsDir: './migrations' });
+ * const PgMigrate = require('@urbica/pg-migrate');
+ * const pgMigrate = new PgMigrate({ database: 'test', migrationsDir: './migrations' });
+ * pgMigrate
+ *  .connect()
+ *  .then(() => pgMigrate.migrate())
+ *  .then(() => pgMigrate.end());
  */
-async function pgMigrate(options) {
+function PgMigrate(options) {
   const { host, port, database, user, password } = options;
 
   if (options.attachMonitor) {
     monitor.attach(pgPromiseOptions);
   }
 
-  const db = pgp({ host, port, database, user, password });
-
-  const schemaName = options.schemaName || 'public';
-  const tableName = options.tableName || 'migrations';
-  const migrationsDir = options.migrationsDir || './migrations';
-
-  const migrations = await readDirAsync(migrationsDir).then(paths =>
-    paths.map(migrationPath => path.join(migrationsDir, migrationPath)));
-
-  return db.tx(async (t) => {
-    const tableExists = await checkMigrationsTable(t, {
-      schemaName,
-      tableName
-    });
-    if (!tableExists) {
-      await createMigrationsTable(t, { schemaName, tableName });
-    }
-    await runMigrations(t, { schemaName, tableName, migrations });
-
-    pgp.end();
-  });
+  this._db = pgp({ host, port, database, user, password });
+  this._migrationsDir = options.migrationsDir || './migrations';
+  this._migrationsTable = {
+    schemaName: options.schemaName || 'public',
+    tableName: options.tableName || 'migrations'
+  };
 }
 
-module.exports = pgMigrate;
+/**
+ * PgMigrate.connect
+ * Prepares database and reads migrations
+ *
+ * @returns {Promise}
+ *
+ * @example
+ * const PgMigrate = require('@urbica/pg-migrate');
+ * const pgMigrate = new PgMigrate();
+ * pgMigrate.connect();
+ */
+PgMigrate.prototype.connect = async function connect() {
+  const migrations = await readMigrations(this._migrationsDir);
+  this._migrations = migrations;
+  await this.checkMigrationsTable();
+  this._connected = true;
+  return this;
+};
+
+PgMigrate.prototype.checkMigrationsTable = function checkMigrationsTable() {
+  const checkTable =
+    'SELECT table_name FROM information_schema.tables WHERE table_schema = ${schemaName} AND table_name = ${tableName}';
+
+  const createTable =
+    'CREATE TABLE ${schemaName~}.${tableName~} (id serial primary key, name varchar, datetime timestamp with time zone)';
+
+  const createIndex = 'CREATE UNIQUE INDEX ON ${schemaName~}.${tableName~} (id, name)';
+
+  return this._db.tx('check-migrations-table', async (t) => {
+    const exists = await t.oneOrNone(checkTable, this._migrationsTable);
+    if (!exists) {
+      await t.batch([
+        t.none(createTable, this._migrationsTable),
+        t.none(createIndex, this._migrationsTable)
+      ]);
+    }
+  });
+};
+
+/**
+ * PgMigrate.migrate
+ * runs migrations
+ *
+ * @param {int} [limit=1] - number of migrations to rollback
+ * @returns {Promise}
+ *
+ * @example
+ * const PgMigrate = require('@urbica/pg-migrate');
+ * const pgMigrate = new PgMigrate();
+ * pgMigrate
+ *  .connect()
+ *  .then(() => pgMigrate.migrate());
+ */
+PgMigrate.prototype.migrate = function migrate() {
+  if (!this._connected) {
+    throw new Error('You should connect to the database before migrating');
+  }
+
+  const checkMigration =
+    'SELECT id FROM ${schemaName~}.${tableName~} WHERE name = ${migrationName}';
+
+  const insertMigration =
+    'INSERT INTO ${schemaName~}.${tableName~} (name, datetime) VALUES (${migrationName}, NOW())';
+
+  const migrationNames = Object.keys(this._migrations);
+  return this._db.tx('migrate', t =>
+    t.sequence(async (index) => {
+      if (index >= migrationNames.length) return undefined;
+      const migrationName = migrationNames[index];
+      const options = { ...this._migrationsTable, migrationName };
+      const exists = await t.oneOrNone(checkMigration, options);
+      if (exists) return t;
+
+      const migration = this._migrations[migrationName].up;
+      const contents = new pgp.QueryFile(migration);
+      return t.batch([t.query(contents), t.query(insertMigration, options)]);
+    }));
+};
+
+/**
+ * PgMigrate.rollback
+ * rollbacks migrations
+ *
+ * @param {int} [limit=1] - number of migrations to rollback
+ * @returns {Promise}
+ *
+ * @example
+ * const PgMigrate = require('@urbica/pg-migrate');
+ * const pgMigrate = new PgMigrate();
+ * pgMigrate
+ *  .connect()
+ *  .then(() => pgMigrate.rollback(1));
+ */
+PgMigrate.prototype.rollback = function rollback(limit = 1) {
+  if (!this._connected) {
+    throw new Error('You should connect to the database before rollback');
+  }
+
+  const selectMigrations =
+    'SELECT name FROM ${schemaName~}.${tableName~} ORDER BY id DESC LIMIT ${limit^}';
+
+  const deleteMigration = 'DELETE FROM ${schemaName~}.${tableName~} WHERE name = ${migrationName}';
+
+  return this._db.tx('rollback', async (t) => {
+    const migrationNames = await t
+      .any(selectMigrations, { ...this._migrationsTable, limit })
+      .then(rows => rows.map(row => row.name));
+
+    return t.sequence((index) => {
+      if (index >= migrationNames.length) return undefined;
+      const migrationName = migrationNames[index];
+      const options = { ...this._migrationsTable, migrationName };
+      const migration = this._migrations[migrationName].down;
+      const contents = new pgp.QueryFile(migration);
+      return t.batch([t.query(contents), t.query(deleteMigration, options)]);
+    });
+  });
+};
+
+/**
+ * PgMigrate.reset
+ * rollbacks all migrations
+ *
+ * @returns {Promise}
+ *
+ * @example
+ * const PgMigrate = require('@urbica/pg-migrate');
+ * const pgMigrate = new PgMigrate();
+ * pgMigrate
+ *  .connect()
+ *  .then(() => pgMigrate.reset());
+ */
+PgMigrate.prototype.reset = function reset() {
+  if (!this._connected) {
+    throw new Error('You should connect to the database before reset');
+  }
+
+  const selectMigrations = 'SELECT name FROM ${schemaName~}.${tableName~} ORDER BY id DESC';
+  const deleteMigration = 'DELETE FROM ${schemaName~}.${tableName~} WHERE name = ${migrationName}';
+
+  return this._db.tx('reset', async (t) => {
+    const migrationNames = await t
+      .any(selectMigrations, this._migrationsTable)
+      .then(rows => rows.map(row => row.name));
+
+    return t.sequence(async (index) => {
+      if (index >= migrationNames.length) return undefined;
+      const migrationName = migrationNames[index];
+      const options = { ...this._migrationsTable, migrationName };
+      const migration = this._migrations[migrationName].down;
+      const contents = new pgp.QueryFile(migration);
+      return t.batch([t.query(contents), t.query(deleteMigration, options)]);
+    });
+  });
+};
+
+/**
+ * PgMigrate.end
+ * closes database connection
+ *
+ * @returns {Promise}
+ *
+ * @example
+ * const PgMigrate = require('@urbica/pg-migrate');
+ * const pgMigrate = new PgMigrate();
+ * pgMigrate
+ *  .connect()
+ *  .then(() => pgMigrate.end());
+ */
+PgMigrate.prototype.end = function end() {
+  pgp.end();
+};
+
+module.exports = PgMigrate;

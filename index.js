@@ -2,7 +2,7 @@
 
 const path = require('path');
 const minimist = require('minimist');
-const pgMigrate = require('./pg-migrate');
+const PgMigrate = require('./pg-migrate');
 const packagejson = require('./package.json');
 
 const config = minimist(process.argv.slice(2), {
@@ -95,7 +95,10 @@ const options = {
 
 async function main() {
   try {
-    await pgMigrate(options);
+    const pgMigrate = new PgMigrate(options);
+    await pgMigrate.connect();
+    await pgMigrate.migrate();
+    await pgMigrate.end();
   } catch (error) {
     /* eslint-disable no-console */
     console.error(error);

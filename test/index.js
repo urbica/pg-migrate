@@ -3,7 +3,7 @@
 const path = require('path');
 const test = require('tape');
 const pgPromise = require('pg-promise');
-const pgMigrate = require('../pg-migrate');
+const PgMigrate = require('../pg-migrate');
 
 const pgPromiseOptions = { capSQL: true, pgNative: true, noWarnings: true };
 const pgp = pgPromise(pgPromiseOptions);
@@ -17,23 +17,77 @@ const migrationsDir = path.join(__dirname, './migrations');
 const tableExistsQuery =
   'SELECT table_name FROM information_schema.tables WHERE table_schema = ${schemaName} AND table_name = ${tableName}';
 
-test('pg-migration', async (t) => {
+test('migrate', async (t) => {
   t.plan(3);
 
-  await pgMigrate({ database, user, migrationsDir });
+  const pgMigrate = new PgMigrate({ database, user, migrationsDir });
+  await pgMigrate.connect();
+  await pgMigrate.migrate();
+  await pgMigrate.end();
+
   const db = pgp({ database, user });
 
-  db
+  await db
     .oneOrNone(tableExistsQuery, { schemaName, tableName })
     .then(tableExists => t.ok(tableExists, 'migrations table created'));
 
-  db
+  await db
     .oneOrNone(tableExistsQuery, { schemaName: 'public', tableName: 'users' })
     .then(tableExists => t.ok(tableExists, 'first migration applied'));
 
-  db
+  await db
     .oneOrNone(tableExistsQuery, { schemaName: 'public', tableName: 'posts' })
     .then(tableExists => t.ok(tableExists, 'second migration applied'));
+
+  await pgp.end();
 });
 
-test.onFinish(() => pgp.end());
+test('rollback', async (t) => {
+  t.plan(3);
+
+  const pgMigrate = new PgMigrate({ database, user, migrationsDir });
+  await pgMigrate.connect();
+  await pgMigrate.rollback();
+  await pgMigrate.end();
+
+  const db = pgp({ database, user });
+
+  await db
+    .oneOrNone(tableExistsQuery, { schemaName, tableName })
+    .then(tableExists => t.ok(tableExists, 'migrations table exists'));
+
+  await db
+    .oneOrNone(tableExistsQuery, { schemaName: 'public', tableName: 'users' })
+    .then(tableExists => t.ok(tableExists, 'first migration applied'));
+
+  await db
+    .oneOrNone(tableExistsQuery, { schemaName: 'public', tableName: 'posts' })
+    .then(tableExists => t.ok(!tableExists, 'second migration rolled back'));
+
+  await pgp.end();
+});
+
+test('reset', async (t) => {
+  t.plan(3);
+
+  const pgMigrate = new PgMigrate({ database, user, migrationsDir });
+  await pgMigrate.connect();
+  await pgMigrate.reset();
+  await pgMigrate.end();
+
+  const db = pgp({ database, user });
+
+  await db
+    .oneOrNone(tableExistsQuery, { schemaName, tableName })
+    .then(tableExists => t.ok(tableExists, 'migrations table exists'));
+
+  await db
+    .oneOrNone(tableExistsQuery, { schemaName: 'public', tableName: 'users' })
+    .then(tableExists => t.ok(!tableExists, 'first migration rolled back'));
+
+  await db
+    .oneOrNone(tableExistsQuery, { schemaName: 'public', tableName: 'posts' })
+    .then(tableExists => t.ok(!tableExists, 'second migration rolled back'));
+
+  await pgp.end();
+});

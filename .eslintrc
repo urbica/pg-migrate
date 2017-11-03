@@ -7,6 +7,12 @@
   },
   "rules": {
     "comma-dangle": ["error", "never"],
+    "no-underscore-dangle": [
+      "error",
+      {
+        "allowAfterThis": true
+      }
+    ],
     "object-curly-newline": [
       "error",
       {
