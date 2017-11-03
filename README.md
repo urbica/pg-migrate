@@ -70,11 +70,13 @@ pgMigrate
 ```js
 const pgMigrate = new PgMigrate({ database, user, migrationsDir });
 
-async migrate() {
+async function migrate() {
   await pgMigrate.connect();
   await pgMigrate.migrate();
   await pgMigrate.end();
 }
+
+migrate();
 ```
 
 See [API](https://github.com/urbica/pg-migrate/blob/master/API.md) for more info.
