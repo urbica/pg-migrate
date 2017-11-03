@@ -3944,9 +3944,9 @@ pg-pool@~2.0.3:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/pg-pool/-/pg-pool-2.0.3.tgz#c022032c8949f312a4f91fb6409ce04076be3257"
 
-pg-promise@7.2.0:
-  version "7.2.0"
-  resolved "https://registry.yarnpkg.com/pg-promise/-/pg-promise-7.2.0.tgz#19e6b45f20a7e2860a0d19fdd44871abfe274dee"
+pg-promise@7.2.1:
+  version "7.2.1"
+  resolved "https://registry.yarnpkg.com/pg-promise/-/pg-promise-7.2.1.tgz#1f786efae4c5b27576bb3d261bf63658e90bf92b"
   dependencies:
     manakin "~0.5.1"
     pg "~7.3.0"

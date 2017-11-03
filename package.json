@@ -38,7 +38,7 @@
     "minimist": "1.2.0",
     "pg-monitor": "0.8.3",
     "pg-native": "2.2.0",
-    "pg-promise": "7.2.0"
+    "pg-promise": "7.2.1"
   },
   "devDependencies": {
     "commitizen": "2.9.6",
