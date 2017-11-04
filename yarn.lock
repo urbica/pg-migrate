@@ -4004,12 +4004,12 @@ pg-pool@~2.0.3:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/pg-pool/-/pg-pool-2.0.3.tgz#c022032c8949f312a4f91fb6409ce04076be3257"
 
-pg-promise@7.2.1:
-  version "7.2.1"
-  resolved "https://registry.yarnpkg.com/pg-promise/-/pg-promise-7.2.1.tgz#1f786efae4c5b27576bb3d261bf63658e90bf92b"
+pg-promise@7.3.1:
+  version "7.3.1"
+  resolved "https://registry.yarnpkg.com/pg-promise/-/pg-promise-7.3.1.tgz#6163cadc50fe99ca23433d4eb900e0a175af1bac"
   dependencies:
     manakin "~0.5.1"
-    pg "~7.3.0"
+    pg "~7.4.0"
     pg-minify "~0.5.3"
     spex "~2.0.1"
 
@@ -4022,9 +4022,9 @@ pg-types@^1.12.1, pg-types@~1.12.1:
     postgres-date "~1.0.0"
     postgres-interval "^1.1.0"
 
-pg@~7.3.0:
-  version "7.3.0"
-  resolved "https://registry.yarnpkg.com/pg/-/pg-7.3.0.tgz#275e27466e54a645f6b4a16f6acadf6b849ad83b"
+pg@~7.4.0:
+  version "7.4.0"
+  resolved "https://registry.yarnpkg.com/pg/-/pg-7.4.0.tgz#e256061d2c52723c3c858defb97f1159ca660f83"
   dependencies:
     buffer-writer "1.0.1"
     js-string-escape "1.0.1"
