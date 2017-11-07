@@ -29,28 +29,34 @@ npm install
 ## Usage
 
 ```shell
-Usage: pg-migrate [options]
+Usage:
+  pg-migrate [options] new <name>
+  pg-migrate [options] migrate
+  pg-migrate [options] rollback <N>
+  pg-migrate [options] reset
+  pg-migrate --help
+  pg-migrate --version
 
-where [options] is any of:
-  --database (PGDATABASE) - database to apply migrations (required)
-  --host (PGHOST) - database host (default: localhost)
-  --port (PGPORT) - database port (default: 5432)
-  --user (PGUSER) - database user
-  --password (PGPASSWORD) - database password
-  --schemaName - database migrations table schema (default: public)
-  --tableName - database migrations table name (default: migrations)
-  --migrationsDir - path to migrations (default: ./migrations)
-  --attachMonitor - attach pg-monitor (default: true)
-  --version - returns running version then exits
-```
+Examples:
+  pg-migrate new create-users
+  pg-migrate migrate
+  pg-migrate rollback 1
+  pg-migrate reset
 
-## Example
+Options:
+  --help                        Show this screen
+  --version                     Show version
+  --verbose                     Show verbose output
+  -m --migrations-dir=DIR       The directory containing your migration files [default: ./migrations]
+  -t --migrations-table=TABLE   Set the name of the migrations table          [default: migrations]
+  -s --migrations-schema=SCHEMA Set the name of the migrations table scheme   [default: public]
 
-Create and write migrations and then run them
-
-```shell
-touch migrations/$(date +%s)-migration_name.{up,down}.sql
-pg-migrate --database=test --migrationsDir=./migrations
+Connection options:
+  -d --dbname=PGDATABASE        database name to connect to
+  -h --host=PGHOST              database server host or socket directory      [default: localhost]
+  -p --port=PGPORT              database server port                          [default: 5432]
+  -U --username=PGUSER          database user name
+  -W --password=PGPASSWORD      force password prompt
 ```
 
 ## Node.js API
