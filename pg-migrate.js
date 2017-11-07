@@ -209,7 +209,7 @@ PgMigrate.prototype.reset = function reset() {
         const options = { ...this._migrationsTable, migrationName };
         const migration = this._migrations[migrationName].down;
         const contents = new pgp.QueryFile(migration);
-        return t.batch([t.query(contents), t.query(deleteMigration, options)]);
+        return await t.batch([t.query(contents), t.query(deleteMigration, options)]);
       }
     });
   });
