@@ -13,7 +13,7 @@ const readDirAsync = promisify(fs.readdir);
 const readMigrations = migrationsDir =>
   readDirAsync(migrationsDir).then(migrationPaths =>
     migrationPaths.reduce((acc, migrationPath) => {
-      const matches = migrationPath.match(/^(\w*-\w*)\.(up|down)\.sql$/i);
+      const matches = migrationPath.match(/^(\w*-[\w-]*)\.(up|down)\.sql$/i);
       if (matches) {
         const [, name, action] = matches;
         if (acc[name]) {
@@ -34,10 +34,10 @@ const readMigrations = migrationsDir =>
  * @param {int} [options.port=5432] - database port
  * @param {string} options.user - database user
  * @param {string} options.password - database password
- * @param {string} [options.schemaName='public'] - database migrations table schema
- * @param {string} [options.tableName='migrations'] - database migrations table name
+ * @param {string} [options.migrationsSchema='public'] - database migrations table schema
+ * @param {string} [options.migrationsTable='migrations'] - database migrations table name
  * @param {string} [options.migrationsDir='./migrations'] - path to migrations dir
- * @param {boolean} [options.attachMonitor=false] - attach [pg-monitor](https://github.com/vitaly-t/pg-monitor)
+ * @param {boolean} [options.verbose=false] - attach [pg-monitor](https://github.com/vitaly-t/pg-monitor)
  * @returns {Promise}
  *
  * @example
@@ -52,15 +52,15 @@ const readMigrations = migrationsDir =>
 function PgMigrate(options) {
   const { host, port, database, user, password } = options;
 
-  if (options.attachMonitor) {
+  if (options.verbose) {
     monitor.attach(pgPromiseOptions);
   }
 
   this._db = pgp({ host, port, database, user, password });
   this._migrationsDir = options.migrationsDir || './migrations';
   this._migrationsTable = {
-    schemaName: options.schemaName || 'public',
-    tableName: options.tableName || 'migrations'
+    schemaName: options.migrationsSchema || 'public',
+    tableName: options.migrationsTable || 'migrations'
   };
 }
 
