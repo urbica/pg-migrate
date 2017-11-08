@@ -218,7 +218,6 @@ PgMigrate.prototype.reset = function reset() {
         const contents = new pgp.QueryFile(migration);
         return t.batch([t.query(contents), t.query(deleteMigration, options)]);
       }
-      return undefined;
     });
   });
 };
