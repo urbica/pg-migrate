@@ -35,11 +35,11 @@ Options:
   -s --migrations-schema=SCHEMA Set the name of the migrations table scheme   [default: public]
 
 Connection options:
-  -d --dbname=PGDATABASE        database name to connect to
+  -d --db=PGDATABASE            database name to connect to
   -h --host=PGHOST              database server host or socket directory      [default: localhost]
   -p --port=PGPORT              database server port                          [default: 5432]
-  -U --username=PGUSER          database user name
-  -W --password=PGPASSWORD      force password prompt
+  -U --user=PGUSER              database user name
+  -W --password=PGPASSWORD      database user name password
 `;
 
 const opt = docopt(doc, { version: packagejson.version });
@@ -48,13 +48,18 @@ const options = {
   database: opt['--db'] || process.env.PGDATABASE,
   host: opt['--host'] || process.env.PGHOST || 'localhost',
   port: opt['--port'] || process.env.PGPORT || 5432,
-  user: opt['--username'] || process.env.PGUSER,
+  user: opt['--user'] || process.env.PGUSER,
   password: opt['--password'] || process.env.PGPASSWORD,
   migrationsSchema: opt['--migrations-schema'],
   migrationsTable: opt['--migrations-table'],
   migrationsDir: opt['--migrations-dir'],
   verbose: opt['--verbose'] || true
 };
+
+const { root } = path.parse(options.migrationsDir);
+if (root !== '/') {
+  options.migrationsDir = path.join(process.cwd(), options.migrationsDir);
+}
 
 async function main() {
   /* eslint-disable no-console */

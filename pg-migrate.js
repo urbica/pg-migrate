@@ -16,10 +16,11 @@ const readMigrations = migrationsDir =>
       const matches = migrationPath.match(/^(\w*-[\w-]*)\.(up|down)\.sql$/i);
       if (matches) {
         const [, name, action] = matches;
+        const migration = path.join(migrationsDir, migrationPath);
         if (acc[name]) {
-          acc[name][action] = path.join(migrationsDir, migrationPath);
+          acc[name][action] = migration;
         } else {
-          acc[name] = { [action]: path.join(migrationsDir, migrationPath) };
+          acc[name] = { [action]: migration };
         }
       }
       return acc;
@@ -164,8 +165,11 @@ PgMigrate.prototype.rollback = function rollback(limit = 1) {
   const deleteMigration = 'DELETE FROM ${schemaName~}.${tableName~} WHERE name = ${migrationName}';
 
   return this._db.tx('rollback', async (t) => {
-    const migrationNames = await t
-      .map(selectMigrations, { ...this._migrationsTable, limit: +limit }, a => a.name);
+    const migrationNames = await t.map(
+      selectMigrations,
+      { ...this._migrationsTable, limit: +limit },
+      migration => migration.name
+    );
 
     return t.sequence((index) => {
       if (index < migrationNames.length) {
@@ -200,8 +204,11 @@ PgMigrate.prototype.reset = function reset() {
   const deleteMigration = 'DELETE FROM ${schemaName~}.${tableName~} WHERE name = ${migrationName}';
 
   return this._db.tx('reset', async (t) => {
-    const migrationNames = await t
-      .map(selectMigrations, this._migrationsTable, a => a.name);
+    const migrationNames = await t.map(
+      selectMigrations,
+      this._migrationsTable,
+      migration => migration.name
+    );
 
     return t.sequence((index) => {
       if (index < migrationNames.length) {
