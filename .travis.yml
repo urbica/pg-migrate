@@ -8,3 +8,7 @@ services:
 
 before_script:
   - psql -U postgres -c 'create database test;'
+
+script:
+  - npm run lint
+  - npm test

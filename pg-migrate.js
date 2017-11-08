@@ -172,13 +172,13 @@ PgMigrate.prototype.rollback = function rollback(limit = 1) {
     );
 
     return t.sequence((index) => {
-      if (index < migrationNames.length) {
-        const migrationName = migrationNames[index];
-        const options = { ...this._migrationsTable, migrationName };
-        const migration = this._migrations[migrationName].down;
-        const contents = new pgp.QueryFile(migration);
-        return t.batch([t.query(contents), t.query(deleteMigration, options)]);
-      }
+      if (index >= migrationNames.length) return undefined;
+
+      const migrationName = migrationNames[index];
+      const options = { ...this._migrationsTable, migrationName };
+      const migration = this._migrations[migrationName].down;
+      const contents = new pgp.QueryFile(migration);
+      return t.batch([t.query(contents), t.query(deleteMigration, options)]);
     });
   });
 };
@@ -211,14 +211,13 @@ PgMigrate.prototype.reset = function reset() {
     );
 
     return t.sequence((index) => {
-      if (index < migrationNames.length) {
-        const migrationName = migrationNames[index];
-        const options = { ...this._migrationsTable, migrationName };
-        const migration = this._migrations[migrationName].down;
-        const contents = new pgp.QueryFile(migration);
-        return t.batch([t.query(contents), t.query(deleteMigration, options)]);
-      }
-      return undefined;
+      if (index >= migrationNames.length) return undefined;
+
+      const migrationName = migrationNames[index];
+      const options = { ...this._migrationsTable, migrationName };
+      const migration = this._migrations[migrationName].down;
+      const contents = new pgp.QueryFile(migration);
+      return t.batch([t.query(contents), t.query(deleteMigration, options)]);
     });
   });
 };
