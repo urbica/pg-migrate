@@ -136,7 +136,7 @@ PgMigrate.prototype.migrate = function migrate() {
 
       const migration = this._migrations[migrationName].up;
       const contents = new pgp.QueryFile(migration);
-      return await t.batch([t.query(contents), t.query(insertMigration, options)]);
+      return t.batch([t.query(contents), t.query(insertMigration, options)]);
     }));
 };
 
@@ -165,9 +165,9 @@ PgMigrate.prototype.rollback = function rollback(limit = 1) {
 
   return this._db.tx('rollback', async (t) => {
     const migrationNames = await t
-      .map(selectMigrations, { ...this._migrationsTable, +limit }, a => a.name);
+      .map(selectMigrations, { ...this._migrationsTable, limit: +limit }, a => a.name);
 
-    return await t.sequence((index) => {
+    return t.sequence((index) => {
       if (index < migrationNames.length) {
         const migrationName = migrationNames[index];
         const options = { ...this._migrationsTable, migrationName };
@@ -203,14 +203,15 @@ PgMigrate.prototype.reset = function reset() {
     const migrationNames = await t
       .map(selectMigrations, this._migrationsTable, a => a.name);
 
-    return await t.sequence(async (index) => {
+    return t.sequence((index) => {
       if (index < migrationNames.length) {
         const migrationName = migrationNames[index];
         const options = { ...this._migrationsTable, migrationName };
         const migration = this._migrations[migrationName].down;
         const contents = new pgp.QueryFile(migration);
-        return await t.batch([t.query(contents), t.query(deleteMigration, options)]);
+        return t.batch([t.query(contents), t.query(deleteMigration, options)]);
       }
+      return undefined;
     });
   });
 };
