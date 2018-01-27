@@ -40,7 +40,7 @@
     "documentation": "5.3.4",
     "dotenv": "4.0.0",
     "gh-pages": "1.1.0",
-    "pg-monitor": "0.8.3",
+    "pg-monitor": "0.8.5",
     "pg-native": "2.2.0",
     "pg-promise": "7.4.0"
   },
