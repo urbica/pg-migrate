@@ -42,7 +42,7 @@
     "gh-pages": "1.1.0",
     "pg-monitor": "0.9.0",
     "pg-native": "2.2.0",
-    "pg-promise": "8.0.0"
+    "pg-promise": "8.1.1"
   },
   "devDependencies": {
     "commitizen": "2.9.6",
