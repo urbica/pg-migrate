@@ -1,6 +1,6 @@
 {
   "name": "@urbica/pg-migrate",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "PostgreSQL migration tool",
   "author": "Stepan Kuzmin <to.stepan.kuzmin@gmail.com> (stepankuzmin.ru)",
   "license": "MIT",
@@ -30,7 +30,11 @@
   "engines": {
     "node": ">=7.6.0"
   },
-  "keywords": ["postgres", "postgresql", "migration"],
+  "keywords": [
+    "postgres",
+    "postgresql",
+    "migration"
+  ],
   "dependencies": {
     "docopt": "0.6.2",
     "documentation": "5.4.0",
