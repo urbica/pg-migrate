@@ -5,7 +5,7 @@ const test = require('tape');
 const pgPromise = require('pg-promise');
 const PgMigrate = require('../pg-migrate');
 
-const pgPromiseOptions = { capSQL: true, pgNative: true, noWarnings: true };
+const pgPromiseOptions = { capSQL: true, noWarnings: true };
 const pgp = pgPromise(pgPromiseOptions);
 
 const database = 'test';

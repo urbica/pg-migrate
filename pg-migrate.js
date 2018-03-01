@@ -6,7 +6,7 @@ const pgPromise = require('pg-promise');
 const monitor = require('pg-monitor');
 const { promisify } = require('util');
 
-const pgPromiseOptions = { capSQL: true, pgNative: true };
+const pgPromiseOptions = { capSQL: true };
 const pgp = pgPromise(pgPromiseOptions);
 
 const readDirAsync = promisify(fs.readdir);
