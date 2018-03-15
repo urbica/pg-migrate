@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.0.2"></a>
+## [1.0.2](https://github.com/urbica/pg-migrate/compare/v1.0.1...v1.0.2) (2018-03-15)
+
+
+### Bug Fixes
+
+* **package:** update documentation to version 5.5.0 ([605306b](https://github.com/urbica/pg-migrate/commit/605306b))
+* **package:** update documentation to version 6.1.0 ([4a99dad](https://github.com/urbica/pg-migrate/commit/4a99dad))
+* **package:** update pg-monitor to version 0.9.1 ([cbdfd85](https://github.com/urbica/pg-migrate/commit/cbdfd85))
+* **package:** update pg-monitor to version 0.9.2 ([df968a5](https://github.com/urbica/pg-migrate/commit/df968a5))
+* **package:** update pg-promise to version 8.2.0 ([df0b501](https://github.com/urbica/pg-migrate/commit/df0b501))
+* **package:** update pg-promise to version 8.2.2 ([239cdef](https://github.com/urbica/pg-migrate/commit/239cdef))
+* expand connection environment variables support ([e3bf47d](https://github.com/urbica/pg-migrate/commit/e3bf47d))
+
+
+
 <a name="1.0.1"></a>
 ## [1.0.1](https://github.com/urbica/pg-migrate/compare/v1.0.0...v1.0.1) (2018-03-01)
 
