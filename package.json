@@ -1,6 +1,6 @@
 {
   "name": "@urbica/pg-migrate",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "PostgreSQL migration tool",
   "author": "Stepan Kuzmin <to.stepan.kuzmin@gmail.com> (stepankuzmin.ru)",
   "license": "MIT",
