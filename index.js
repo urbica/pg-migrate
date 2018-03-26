@@ -45,11 +45,11 @@ Connection options:
 const opt = docopt(doc, { version: packagejson.version });
 
 const options = {
-  database: opt['--db'] || process.env.PGDATABASE || process.env.POSTGRES_DB,
-  host: opt['--host'] || process.env.PGHOST || process.env.POSTGRES_HOST || 'localhost',
-  port: opt['--port'] || process.env.PGPORT || process.env.POSTGRES_PORT || 5432,
-  user: opt['--user'] || process.env.PGUSER || process.env.POSTGRES_USER,
-  password: opt['--password'] || process.env.PGPASSWORD || process.env.POSTGRES_PASSWORD,
+  database: process.env.PGDATABASE || process.env.POSTGRES_DB || opt['--db'],
+  host: process.env.PGHOST || process.env.POSTGRES_HOST || opt['--host'],
+  port: process.env.PGPORT || process.env.POSTGRES_PORT || opt['--port'],
+  user: process.env.PGUSER || process.env.POSTGRES_USER || opt['--user'],
+  password: process.env.PGPASSWORD || process.env.POSTGRES_PASSWORD || opt['--password'],
   migrationsSchema: opt['--migrations-schema'],
   migrationsTable: opt['--migrations-table'],
   migrationsDir: opt['--migrations-dir'],
