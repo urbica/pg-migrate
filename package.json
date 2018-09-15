@@ -39,16 +39,16 @@
     "docopt": "0.6.2",
     "documentation": "8.1.2",
     "dotenv": "6.0.0",
-    "gh-pages": "1.2.0",
+    "gh-pages": "2.0.0",
     "pg-monitor": "1.0.0",
     "pg-promise": "8.4.6"
   },
   "devDependencies": {
-    "commitizen": "2.10.0",
+    "commitizen": "2.10.1",
     "cz-conventional-changelog": "2.1.0",
     "eslint": "4.19.1",
     "eslint-config-airbnb-base": "12.1.0",
-    "eslint-plugin-import": "2.13.0",
+    "eslint-plugin-import": "2.14.0",
     "standard-version": "4.4.0",
     "tape": "4.9.1"
   }
