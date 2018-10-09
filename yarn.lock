@@ -4147,12 +4147,12 @@ pg-pool@~2.0.3:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/pg-pool/-/pg-pool-2.0.3.tgz#c022032c8949f312a4f91fb6409ce04076be3257"
 
-pg-promise@8.4.6:
-  version "8.4.6"
-  resolved "https://registry.yarnpkg.com/pg-promise/-/pg-promise-8.4.6.tgz#daccfcd5545e7fe165f26f76b4141661afe48d05"
+pg-promise@8.5.0:
+  version "8.5.0"
+  resolved "https://registry.yarnpkg.com/pg-promise/-/pg-promise-8.5.0.tgz#05be517e974582e0935b0b434ce2d675816d76a0"
   dependencies:
     manakin "0.5.1"
-    pg "7.4.3"
+    pg "7.5.0"
     pg-minify "0.5.4"
     spex "2.0.2"
 
@@ -4165,9 +4165,9 @@ pg-types@~1.12.1:
     postgres-date "~1.0.0"
     postgres-interval "^1.1.0"
 
-pg@7.4.3:
-  version "7.4.3"
-  resolved "https://registry.yarnpkg.com/pg/-/pg-7.4.3.tgz#f7b6f93f5340ecc2596afbb94a13e3d6b609834b"
+pg@7.5.0:
+  version "7.5.0"
+  resolved "https://registry.yarnpkg.com/pg/-/pg-7.5.0.tgz#c2853bef2fcb91424ba2f649fd951ce866a84760"
   dependencies:
     buffer-writer "1.0.1"
     packet-reader "0.3.1"
