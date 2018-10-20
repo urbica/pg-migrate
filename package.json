@@ -40,11 +40,11 @@
     "documentation": "8.1.2",
     "dotenv": "6.1.0",
     "gh-pages": "2.0.1",
-    "pg-monitor": "1.0.0",
+    "pg-monitor": "1.0.1",
     "pg-promise": "8.5.1"
   },
   "devDependencies": {
-    "commitizen": "3.0.2",
+    "commitizen": "3.0.3",
     "cz-conventional-changelog": "2.1.0",
     "eslint": "5.0.0",
     "eslint-config-airbnb-base": "12.1.0",
