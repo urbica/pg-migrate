@@ -1075,9 +1075,9 @@ buffer-shims@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/buffer-shims/-/buffer-shims-1.0.0.tgz#9978ce317388c649ad8793028c3477ef044a8b51"
 
-buffer-writer@1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/buffer-writer/-/buffer-writer-1.0.1.tgz#22a936901e3029afcd7547eb4487ceb697a3bf08"
+buffer-writer@2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/buffer-writer/-/buffer-writer-2.0.0.tgz#ce7eb81a38f7829db09c873f2fbb792c0c98ec04"
 
 builtin-modules@^1.0.0:
   version "1.1.1"
@@ -4164,12 +4164,12 @@ pg-pool@~2.0.3:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/pg-pool/-/pg-pool-2.0.3.tgz#c022032c8949f312a4f91fb6409ce04076be3257"
 
-pg-promise@8.5.1:
-  version "8.5.1"
-  resolved "https://registry.yarnpkg.com/pg-promise/-/pg-promise-8.5.1.tgz#41b447a2e09e9739f241539f0b5445bc822333b4"
+pg-promise@8.5.2:
+  version "8.5.2"
+  resolved "https://registry.yarnpkg.com/pg-promise/-/pg-promise-8.5.2.tgz#ea78fb7989ce05427cd064079e5539384b8e3654"
   dependencies:
     manakin "0.5.2"
-    pg "7.5.0"
+    pg "7.6.1"
     pg-minify "0.5.5"
     spex "2.1.0"
 
@@ -4182,11 +4182,11 @@ pg-types@~1.12.1:
     postgres-date "~1.0.0"
     postgres-interval "^1.1.0"
 
-pg@7.5.0:
-  version "7.5.0"
-  resolved "https://registry.yarnpkg.com/pg/-/pg-7.5.0.tgz#c2853bef2fcb91424ba2f649fd951ce866a84760"
+pg@7.6.1:
+  version "7.6.1"
+  resolved "https://registry.yarnpkg.com/pg/-/pg-7.6.1.tgz#42c68aed37bf38b813616e3d21f4338f350c1b79"
   dependencies:
-    buffer-writer "1.0.1"
+    buffer-writer "2.0.0"
     packet-reader "0.3.1"
     pg-connection-string "0.1.3"
     pg-pool "~2.0.3"
