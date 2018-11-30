@@ -41,7 +41,7 @@
     "dotenv": "6.1.0",
     "gh-pages": "2.0.1",
     "pg-monitor": "1.0.1",
-    "pg-promise": "8.5.2"
+    "pg-promise": "8.5.3"
   },
   "devDependencies": {
     "commitizen": "3.0.5",
