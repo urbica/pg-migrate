@@ -37,7 +37,7 @@
   ],
   "dependencies": {
     "docopt": "0.6.2",
-    "documentation": "8.1.2",
+    "documentation": "9.0.0",
     "dotenv": "6.2.0",
     "gh-pages": "2.0.1",
     "pg-monitor": "1.0.1",
