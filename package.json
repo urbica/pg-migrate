@@ -50,6 +50,6 @@
     "eslint-config-airbnb-base": "12.1.0",
     "eslint-plugin-import": "2.14.0",
     "standard-version": "4.4.0",
-    "tape": "4.9.1"
+    "tape": "4.9.2"
   }
 }
