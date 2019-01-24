@@ -37,18 +37,18 @@
   ],
   "dependencies": {
     "docopt": "0.6.2",
-    "documentation": "8.1.2",
+    "documentation": "9.1.1",
     "dotenv": "6.2.0",
     "gh-pages": "2.0.1",
-    "pg-monitor": "1.0.1",
+    "pg-monitor": "1.1.0",
     "pg-promise": "8.5.5"
   },
   "devDependencies": {
     "commitizen": "3.0.5",
     "cz-conventional-changelog": "2.1.0",
-    "eslint": "5.0.0",
-    "eslint-config-airbnb-base": "12.1.0",
-    "eslint-plugin-import": "2.14.0",
+    "eslint": "5.12.1",
+    "eslint-config-airbnb-base": "13.1.0",
+    "eslint-plugin-import": "2.15.0",
     "standard-version": "4.4.0",
     "tape": "4.9.2"
   }

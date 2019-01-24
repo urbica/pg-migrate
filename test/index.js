@@ -14,8 +14,7 @@ const schemaName = 'public';
 const tableName = 'migrations';
 const migrationsDir = path.join(__dirname, './migrations');
 
-const tableExistsQuery =
-  'SELECT table_name FROM information_schema.tables WHERE table_schema = ${schemaName} AND table_name = ${tableName}';
+const tableExistsQuery = 'SELECT table_name FROM information_schema.tables WHERE table_schema = ${schemaName} AND table_name = ${tableName}';
 
 test('migrate', async (t) => {
   t.plan(3);
