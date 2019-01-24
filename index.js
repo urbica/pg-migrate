@@ -49,7 +49,10 @@ const options = {
   host: process.env.PGHOST || process.env.POSTGRES_HOST || opt['--host'],
   port: process.env.PGPORT || process.env.POSTGRES_PORT || opt['--port'],
   user: process.env.PGUSER || process.env.POSTGRES_USER || opt['--user'],
-  password: process.env.PGPASSWORD || process.env.POSTGRES_PASSWORD || opt['--password'],
+  password:
+    process.env.PGPASSWORD ||
+    process.env.POSTGRES_PASSWORD ||
+    opt['--password'],
   migrationsSchema: opt['--migrations-schema'],
   migrationsTable: opt['--migrations-table'],
   migrationsDir: opt['--migrations-dir'],
@@ -69,9 +72,23 @@ async function main() {
     const content = '-- replace with your sql';
     const ts = Math.floor(new Date() / 1000);
     const baseName = `${ts}-${opt['<name>']}`;
-    const up = path.format({ dir: options.migrationsDir, name: baseName, ext: '.up.sql' });
-    const down = path.format({ dir: options.migrationsDir, name: baseName, ext: '.down.sql' });
-    await Promise.all([writeFileAsync(up, content), writeFileAsync(down, content)]);
+
+    const up = path.format({
+      dir: options.migrationsDir,
+      name: baseName,
+      ext: '.up.sql'
+    });
+
+    const down = path.format({
+      dir: options.migrationsDir,
+      name: baseName,
+      ext: '.down.sql'
+    });
+
+    await Promise.all([
+      writeFileAsync(up, content),
+      writeFileAsync(down, content)
+    ]);
 
     console.log(up);
     console.log(down);

@@ -10,19 +10,21 @@ const pgPromiseOptions = { capSQL: true };
 const pgp = pgPromise(pgPromiseOptions);
 
 const readDirAsync = promisify(fs.readdir);
-const readMigrations = migrationsDir => readDirAsync(migrationsDir).then(migrationPaths => migrationPaths.reduce((acc, migrationPath) => {
-  const matches = migrationPath.match(/^(\w*-[\w-]*)\.(up|down)\.sql$/i);
-  if (matches) {
-    const [, name, action] = matches;
-    const migration = path.join(migrationsDir, migrationPath);
-    if (acc[name]) {
-      acc[name][action] = migration;
-    } else {
-      acc[name] = { [action]: migration };
-    }
-  }
-  return acc;
-}, {}));
+const readMigrations = migrationsDir =>
+  readDirAsync(migrationsDir).then(migrationPaths =>
+    migrationPaths.reduce((acc, migrationPath) => {
+      const matches = migrationPath.match(/^(\w*-[\w-]*)\.(up|down)\.sql$/i);
+      if (matches) {
+        const [, name, action] = matches;
+        const migration = path.join(migrationsDir, migrationPath);
+        if (acc[name]) {
+          acc[name][action] = migration;
+        } else {
+          acc[name] = { [action]: migration };
+        }
+      }
+      return acc;
+    }, {}));
 
 /**
  * PgMigrate
@@ -82,11 +84,14 @@ PgMigrate.prototype.connect = async function connect() {
 };
 
 PgMigrate.prototype.checkMigrationsTable = function checkMigrationsTable() {
-  const checkTable = 'SELECT table_name FROM information_schema.tables WHERE table_schema = ${schemaName} AND table_name = ${tableName}';
+  const checkTable =
+    'SELECT table_name FROM information_schema.tables WHERE table_schema = ${schemaName} AND table_name = ${tableName}';
 
-  const createTable = 'CREATE TABLE ${schemaName~}.${tableName~} (id serial primary key, name varchar, datetime timestamp with time zone)';
+  const createTable =
+    'CREATE TABLE ${schemaName~}.${tableName~} (id serial primary key, name varchar, datetime timestamp with time zone)';
 
-  const createIndex = 'CREATE UNIQUE INDEX ON ${schemaName~}.${tableName~} (id, name)';
+  const createIndex =
+    'CREATE UNIQUE INDEX ON ${schemaName~}.${tableName~} (id, name)';
 
   return this._db.tx('check-migrations-table', async (t) => {
     const exists = await t.oneOrNone(checkTable, this._migrationsTable);
@@ -116,22 +121,25 @@ PgMigrate.prototype.migrate = function migrate() {
     throw new Error('You should connect to the database before migrating');
   }
 
-  const checkMigration = 'SELECT id FROM ${schemaName~}.${tableName~} WHERE name = ${migrationName}';
+  const checkMigration =
+    'SELECT id FROM ${schemaName~}.${tableName~} WHERE name = ${migrationName}';
 
-  const insertMigration = 'INSERT INTO ${schemaName~}.${tableName~} (name, datetime) VALUES (${migrationName}, NOW())';
+  const insertMigration =
+    'INSERT INTO ${schemaName~}.${tableName~} (name, datetime) VALUES (${migrationName}, NOW())';
 
   const migrationNames = Object.keys(this._migrations);
-  return this._db.tx('migrate', t => t.sequence(async (index) => {
-    if (index >= migrationNames.length) return undefined;
-    const migrationName = migrationNames[index];
-    const options = { ...this._migrationsTable, migrationName };
-    const exists = await t.oneOrNone(checkMigration, options);
-    if (exists) return t;
+  return this._db.tx('migrate', t =>
+    t.sequence(async (index) => {
+      if (index >= migrationNames.length) return undefined;
+      const migrationName = migrationNames[index];
+      const options = { ...this._migrationsTable, migrationName };
+      const exists = await t.oneOrNone(checkMigration, options);
+      if (exists) return t;
 
-    const migration = this._migrations[migrationName].up;
-    const contents = new pgp.QueryFile(migration);
-    return t.batch([t.query(contents), t.query(insertMigration, options)]);
-  }));
+      const migration = this._migrations[migrationName].up;
+      const contents = new pgp.QueryFile(migration);
+      return t.batch([t.query(contents), t.query(insertMigration, options)]);
+    }));
 };
 
 /**
@@ -152,9 +160,11 @@ PgMigrate.prototype.rollback = function rollback(limit = 1) {
     throw new Error('You should connect to the database before rollback');
   }
 
-  const selectMigrations = 'SELECT name FROM ${schemaName~}.${tableName~} ORDER BY id DESC LIMIT ${limit}';
+  const selectMigrations =
+    'SELECT name FROM ${schemaName~}.${tableName~} ORDER BY id DESC LIMIT ${limit}';
 
-  const deleteMigration = 'DELETE FROM ${schemaName~}.${tableName~} WHERE name = ${migrationName}';
+  const deleteMigration =
+    'DELETE FROM ${schemaName~}.${tableName~} WHERE name = ${migrationName}';
 
   return this._db.tx('rollback', async (t) => {
     const migrationNames = await t.map(
@@ -192,8 +202,10 @@ PgMigrate.prototype.reset = function reset() {
     throw new Error('You should connect to the database before reset');
   }
 
-  const selectMigrations = 'SELECT name FROM ${schemaName~}.${tableName~} ORDER BY id DESC';
-  const deleteMigration = 'DELETE FROM ${schemaName~}.${tableName~} WHERE name = ${migrationName}';
+  const selectMigrations =
+    'SELECT name FROM ${schemaName~}.${tableName~} ORDER BY id DESC';
+  const deleteMigration =
+    'DELETE FROM ${schemaName~}.${tableName~} WHERE name = ${migrationName}';
 
   return this._db.tx('reset', async (t) => {
     const migrationNames = await t.map(
