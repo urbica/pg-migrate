@@ -5,6 +5,7 @@ require('dotenv').config();
 const fs = require('fs');
 const path = require('path');
 const { docopt } = require('docopt');
+const { parse } = require('pg-connection-string');
 const { promisify } = require('util');
 const PgMigrate = require('./pg-migrate');
 const packagejson = require('./package.json');
@@ -35,24 +36,28 @@ Options:
   -s --migrations-schema=SCHEMA Set the name of the migrations table scheme   [default: public]
 
 Connection options:
-  -d --db=PGDATABASE            database name to connect to
-  -h --host=PGHOST              database server host or socket directory      [default: localhost]
-  -p --port=PGPORT              database server port                          [default: 5432]
-  -U --user=PGUSER              database user name
-  -W --password=PGPASSWORD      database user name password
+  -c --connection=DATABASE_URL        database connection string in libpq format
+  -d --db=PGDATABASE                  database name to connect to
+  -h --host=PGHOST                    database server host or socket directory      [default: localhost]
+  -p --port=PGPORT                    database server port                          [default: 5432]
+  -U --user=PGUSER                    database user name
+  -W --password=PGPASSWORD            database user name password
 `;
 
 const opt = docopt(doc, { version: packagejson.version });
 
-const options = {
-  database: process.env.PGDATABASE || process.env.POSTGRES_DB || opt['--db'],
-  host: process.env.PGHOST || process.env.POSTGRES_HOST || opt['--host'],
-  port: process.env.PGPORT || process.env.POSTGRES_PORT || opt['--port'],
-  user: process.env.PGUSER || process.env.POSTGRES_USER || opt['--user'],
+const connectionString = opt['--connection'] || process.env.DATABASE_URL;
+const connection = (connectionString && parse(connectionString)) || {
+  database: opt['--db'] || process.env.PGDATABASE || process.env.POSTGRES_DB,
+  host: opt['--host'] || process.env.PGHOST || process.env.POSTGRES_HOST,
+  port: opt['--port'] || process.env.PGPORT || process.env.POSTGRES_PORT,
+  user: opt['--user'] || process.env.PGUSER || process.env.POSTGRES_USER,
   password:
-    process.env.PGPASSWORD ||
-    process.env.POSTGRES_PASSWORD ||
-    opt['--password'],
+    opt['--password'] || process.env.PGPASSWORD || process.env.POSTGRES_PASSWORD
+};
+
+const options = {
+  ...connection,
   migrationsSchema: opt['--migrations-schema'],
   migrationsTable: opt['--migrations-table'],
   migrationsDir: opt['--migrations-dir'],
