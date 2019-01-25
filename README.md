@@ -53,11 +53,12 @@ Options:
   -s --migrations-schema=SCHEMA Set the name of the migrations table scheme   [default: public]
 
 Connection options:
-  -d --db=PGDATABASE            database name to connect to
-  -h --host=PGHOST              database server host or socket directory      [default: localhost]
-  -p --port=PGPORT              database server port                          [default: 5432]
-  -U --user=PGUSER              database user name
-  -W --password=PGPASSWORD      database user name password
+  -c --connection=DATABASE_URL        database connection string in libpq format
+  -d --db=PGDATABASE                  database name to connect to
+  -h --host=PGHOST                    database server host or socket directory      [default: localhost]
+  -p --port=PGPORT                    database server port                          [default: 5432]
+  -U --user=PGUSER                    database user name
+  -W --password=PGPASSWORD            database user name password
 ```
 
 ## Node.js API
@@ -66,12 +67,15 @@ Using Promises
 
 ```js
 const PgMigrate = require('@urbica/pg-migrate');
-const pgMigrate = new PgMigrate({ database: 'test', migrationsDir: './migrations' });
+const pgMigrate = new PgMigrate({
+  database: 'test',
+  migrationsDir: './migrations'
+});
 
 pgMigrate
- .connect()
- .then(() => pgMigrate.migrate())
- .then(() => pgMigrate.end());
+  .connect()
+  .then(() => pgMigrate.migrate())
+  .then(() => pgMigrate.end());
 ```
 
 ...or using async/await
