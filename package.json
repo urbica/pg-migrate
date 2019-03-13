@@ -39,7 +39,7 @@
   "dependencies": {
     "docopt": "^0.6.2",
     "documentation": "^9.3.0",
-    "dotenv": "^6.2.0",
+    "dotenv": "^7.0.0",
     "gh-pages": "^2.0.1",
     "pg-connection-string": "^2.0.0",
     "pg-monitor": "^1.1.0",
