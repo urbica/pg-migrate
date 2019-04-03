@@ -4954,7 +4954,7 @@ mimic-fn@^2.0.0:
   resolved "https://registry.yarnpkg.com/mimic-fn/-/mimic-fn-2.0.0.tgz#0913ff0b121db44ef5848242c38bbb35d44cabde"
   integrity sha512-jbex9Yd/3lmICXwYT6gA/j2mNQGU48wCh/VzRd+/Y/PjYQtlg1gLMdZqvu9s/xH7qKvngxRObl56XZR609IMbA==
 
-minimatch@3.0.4, minimatch@^3.0.2, minimatch@^3.0.4:
+minimatch@^3.0.2, minimatch@^3.0.4:
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/minimatch/-/minimatch-3.0.4.tgz#5166e286457f03306064be5497e8dbb0c3d32083"
   integrity sha512-yJHVQEhyqPLUTgt9B83PXu6W3rx4MvvHvSUvToogpwoGDOUQ+yDrR0HRot+yOCdCO7u4hX3pWft6kWBBcqh0UA==
@@ -6191,13 +6191,6 @@ rechoir@^0.6.2:
   dependencies:
     resolve "^1.1.6"
 
-recursive-readdir@^2.2.2:
-  version "2.2.2"
-  resolved "https://registry.yarnpkg.com/recursive-readdir/-/recursive-readdir-2.2.2.tgz#9946fb3274e1628de6e36b2f6714953b4845094f"
-  integrity sha512-nRCcW9Sj7NuZwa2XvH9co8NPeXUBhZP7CRKJtU+cS6PW9FpCIFoI5ib0NT1ZrbNuPoRy0ylyCaUL8Gih4LSyFg==
-  dependencies:
-    minimatch "3.0.4"
-
 redent@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/redent/-/redent-1.0.0.tgz#cf916ab1fd5f1f16dfb20822dd6ec7f730c2afde"
@@ -6950,10 +6943,10 @@ snyk-try-require@1.3.1, snyk-try-require@^1.1.1, snyk-try-require@^1.3.1:
     lru-cache "^4.0.0"
     then-fs "^2.0.0"
 
-snyk@1.147.1:
-  version "1.147.1"
-  resolved "https://registry.yarnpkg.com/snyk/-/snyk-1.147.1.tgz#6307394c098edb5b2fe218c361e3bdda80e22952"
-  integrity sha512-HAS1H0kiKg3ZI1ZaMbiU+2xjVRZvHwD6tLM6tPmKWEzLkd8Aco56OXhN5dpzR0l4tD7c6PBJ5CHZI9GstHdTmA==
+snyk@1.147.2:
+  version "1.147.2"
+  resolved "https://registry.yarnpkg.com/snyk/-/snyk-1.147.2.tgz#ac904f2dec052974a4ff0858732eb51d50d07220"
+  integrity sha512-2JIgvTac84GpimeuE7djv5Iu0VSGAL/IL1tBFeYoOF9d4KCo4gCeB9iX1ymq1aweu4/PClCr7yvqDaVmgzgetQ==
   dependencies:
     "@snyk/dep-graph" "1.4.1"
     "@snyk/gemfile" "1.2.0"
@@ -6963,6 +6956,7 @@ snyk@1.147.1:
     configstore "^3.1.2"
     debug "^3.1.0"
     diff "^4.0.1"
+    glob "^7.1.3"
     inquirer "^6.2.2"
     lodash "^4.17.11"
     needle "^2.2.4"
@@ -6970,7 +6964,6 @@ snyk@1.147.1:
     os-name "^3.0.0"
     proxy-agent "^3.1.0"
     proxy-from-env "^1.0.0"
-    recursive-readdir "^2.2.2"
     semver "^6.0.0"
     snyk-config "^2.2.1"
     snyk-docker-plugin "1.22.1"
