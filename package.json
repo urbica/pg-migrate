@@ -47,7 +47,7 @@
     "pg-connection-string": "^2.0.0",
     "pg-monitor": "^1.1.0",
     "pg-promise": "^8.6.4",
-    "snyk": "^1.217.3"
+    "snyk": "^1.221.0"
   },
   "devDependencies": {
     "commitizen": "^3.0.7",

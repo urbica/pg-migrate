@@ -484,3 +484,15 @@ patch:
         patched: '2019-08-21T10:17:33.391Z'
     - documentation > @babel/preset-env > @babel/plugin-proposal-async-generator-functions > @babel/helper-remap-async-to-generator > @babel/helper-wrap-function > @babel/traverse > @babel/helper-function-name > @babel/helper-get-function-arity > @babel/types > lodash:
         patched: '2019-08-21T10:17:33.391Z'
+    - snyk > snyk-nuget-plugin > dotnet-deps-parser > lodash:
+        patched: '2019-08-27T09:11:51.853Z'
+    - snyk > snyk-config > lodash:
+        patched: '2019-08-27T09:11:51.853Z'
+    - snyk > inquirer > lodash:
+        patched: '2019-08-27T09:11:51.853Z'
+    - snyk > snyk-go-plugin > graphlib > lodash:
+        patched: '2019-08-27T09:11:51.853Z'
+    - snyk > @snyk/dep-graph > graphlib > lodash:
+        patched: '2019-08-27T09:11:51.853Z'
+    - snyk > snyk-nodejs-lockfile-parser > graphlib > lodash:
+        patched: '2019-08-27T09:11:51.853Z'
