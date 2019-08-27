@@ -3,7 +3,6 @@
 [![npm version](https://img.shields.io/npm/v/@urbica/pg-migrate.svg)](https://www.npmjs.com/package/@urbica/pg-migrate)
 [![npm downloads](https://img.shields.io/npm/dt/@urbica/pg-migrate.svg)](https://www.npmjs.com/package/@urbica/pg-migrate)
 [![Build Status](https://travis-ci.org/urbica/pg-migrate.svg?branch=master)](https://travis-ci.org/urbica/pg-migrate)
-[![Greenkeeper badge](https://badges.greenkeeper.io/urbica/pg-migrate.svg)](https://greenkeeper.io/)
 
 PostgreSQL migration tool.
 
