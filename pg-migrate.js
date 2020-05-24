@@ -35,6 +35,7 @@ const readMigrations = migrationsDir =>
  * @param {int} [options.port=5432] - database port
  * @param {string} options.user - database user
  * @param {string} options.password - database password
+ * @param {boolean} options.ssl - can also be ISSLConfig-like option https://github.com/vitaly-t/pg-promise/wiki/Connection-Syntax#configuration-object 
  * @param {string} [options.migrationsSchema='public'] - database migrations table schema
  * @param {string} [options.migrationsTable='migrations'] - database migrations table name
  * @param {string} [options.migrationsDir='./migrations'] - path to migrations dir
@@ -51,13 +52,13 @@ const readMigrations = migrationsDir =>
  *  .then(() => pgMigrate.end());
  */
 function PgMigrate(options) {
-  const { host, port, database, user, password } = options;
+  const { host, port, database, user, password, ssl } = options;
 
   if (options.verbose) {
     monitor.attach(pgPromiseOptions);
   }
 
-  this._db = pgp({ host, port, database, user, password });
+  this._db = pgp({ host, port, database, user, password, ssl });
   this._migrationsDir = options.migrationsDir || './migrations';
   this._migrationsTable = {
     schemaName: options.migrationsSchema || 'public',
