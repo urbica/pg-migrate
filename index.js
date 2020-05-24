@@ -42,6 +42,7 @@ Connection options:
   -p --port=PGPORT                    database server port                          [default: 5432]
   -U --user=PGUSER                    database user name
   -W --password=PGPASSWORD            database user name password
+  -S --ssl=PGSSL                      database connection using ssl                 [default: false]
 `;
 
 const opt = docopt(doc, { version: packagejson.version });
