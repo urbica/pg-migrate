@@ -1,25 +1,28 @@
 <!doctype html>
-<html>
+<html lang="en">
 <head>
-  <meta charset='utf-8' />
-  <title>@urbica/pg-migrate 1.1.0 | Documentation</title>
-  <meta name='viewport' content='width=device-width,initial-scale=1'>
-  <link href='assets/bass.css' type='text/css' rel='stylesheet' />
-  <link href='assets/style.css' type='text/css' rel='stylesheet' />
-  <link href='assets/github.css' type='text/css' rel='stylesheet' />
-  <link href='assets/split.css' type='text/css' rel='stylesheet' />
+  <meta charset='utf-8'>
+  <title>@urbica/pg-migrate 1.2.0 | Documentation</title>
   <meta name='description' content='PostgreSQL migration tool'>
+  <meta name='viewport' content='width=device-width,initial-scale=1'>
+  <link href='assets/bass.css' rel='stylesheet'>
+  <link href='assets/style.css' rel='stylesheet'>
+  <link href='assets/github.css' rel='stylesheet'>
+  <link href='assets/split.css' rel='stylesheet'>
 </head>
 <body class='documentation m0'>
     <div class='flex'>
       <div id='split-left' class='overflow-auto fs0 height-viewport-100'>
         <div class='py1 px2'>
           <h3 class='mb0 no-anchor'>@urbica/pg-migrate</h3>
-          <div class='mb1'><code>1.1.0</code></div>
+          <div class='mb1'><code>1.2.0</code></div>
           <input
             placeholder='Filter'
             id='filter-input'
             class='col12 block input'
+            spellcheck='false'
+            autocapitalize='off'
+            autocorrect='off'
             type='text' />
           <div id='toc'>
             <ul class='list-reset h5 py1-ul'>
@@ -96,7 +99,7 @@
     </h3>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/urbica/pg-migrate/blob/22f400c2f57c9e205813d5c1a0d9362418a60dc0/pg-migrate.js#L53-L66'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/urbica/pg-migrate/blob/8e81a3238f50159d3b30b83ec9cbf62d0ea07f1a/pg-migrate.js#L54-L67'>
       <span>pg-migrate.js</span>
       </a>
     
@@ -105,10 +108,7 @@
 
   <p>PgMigrate</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>new PgMigrate(options: <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></div>
-   
   
   
 
@@ -193,6 +193,16 @@
 
               
                 <tr>
+  <td class='break-word'><span class='code bold'>options.ssl</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Boolean">boolean</a></code>
+  </td>
+  <td class='break-word'><span>can also be ISSLConfig-like option 
+<a href="https://github.com/vitaly-t/pg-promise/wiki/Connection-Syntax#configuration-object">https://github.com/vitaly-t/pg-promise/wiki/Connection-Syntax#configuration-object</a>
+</span></td>
+</tr>
+
+
+              
+                <tr>
   <td class='break-word'><span class='code bold'>options.migrationsSchema</span> <code class='quiet'><a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String">string</a></code>
   
     (default <code>&#39;public&#39;</code>)
@@ -260,6 +270,8 @@
   
 
   
+
+  
     <div class='py1 quiet mt1 prose-big'>Example</div>
     
       
@@ -293,7 +305,7 @@ pgMigrate
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/urbica/pg-migrate/blob/22f400c2f57c9e205813d5c1a0d9362418a60dc0/pg-migrate.js#L78-L84'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/urbica/pg-migrate/blob/8e81a3238f50159d3b30b83ec9cbf62d0ea07f1a/pg-migrate.js#L79-L85'>
       <span>pg-migrate.js</span>
       </a>
     
@@ -302,10 +314,7 @@ pgMigrate
 
   <p>prepares database and reads migrations</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>connect(): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></div>
-   
   
   
 
@@ -333,6 +342,8 @@ pgMigrate
   
 
   
+
+  
     <div class='py1 quiet mt1 prose-big'>Example</div>
     
       
@@ -340,6 +351,8 @@ pgMigrate
 <span class="hljs-keyword">const</span> pgMigrate = <span class="hljs-keyword">new</span> PgMigrate();
 pgMigrate.connect();</pre>
     
+  
+
   
 
   
@@ -366,7 +379,7 @@ pgMigrate.connect();</pre>
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/urbica/pg-migrate/blob/22f400c2f57c9e205813d5c1a0d9362418a60dc0/pg-migrate.js#L119-L143'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/urbica/pg-migrate/blob/8e81a3238f50159d3b30b83ec9cbf62d0ea07f1a/pg-migrate.js#L120-L144'>
       <span>pg-migrate.js</span>
       </a>
     
@@ -375,10 +388,7 @@ pgMigrate.connect();</pre>
 
   <p>runs migrations</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>migrate(): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></div>
-   
   
   
 
@@ -406,6 +416,8 @@ pgMigrate.connect();</pre>
   
 
   
+
+  
     <div class='py1 quiet mt1 prose-big'>Example</div>
     
       
@@ -415,6 +427,8 @@ pgMigrate
  .connect()
  .then(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> pgMigrate.migrate());</pre>
     
+  
+
   
 
   
@@ -441,7 +455,7 @@ pgMigrate
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/urbica/pg-migrate/blob/22f400c2f57c9e205813d5c1a0d9362418a60dc0/pg-migrate.js#L158-L186'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/urbica/pg-migrate/blob/8e81a3238f50159d3b30b83ec9cbf62d0ea07f1a/pg-migrate.js#L159-L187'>
       <span>pg-migrate.js</span>
       </a>
     
@@ -450,10 +464,7 @@ pgMigrate
 
   <p>rollbacks migrations</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>rollback(limit: int): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></div>
-   
   
   
 
@@ -496,6 +507,8 @@ pgMigrate
   
 
   
+
+  
     <div class='py1 quiet mt1 prose-big'>Example</div>
     
       
@@ -505,6 +518,8 @@ pgMigrate
  .connect()
  .then(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> pgMigrate.rollback(<span class="hljs-number">1</span>));</pre>
     
+  
+
   
 
   
@@ -531,7 +546,7 @@ pgMigrate
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/urbica/pg-migrate/blob/22f400c2f57c9e205813d5c1a0d9362418a60dc0/pg-migrate.js#L200-L227'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/urbica/pg-migrate/blob/8e81a3238f50159d3b30b83ec9cbf62d0ea07f1a/pg-migrate.js#L201-L228'>
       <span>pg-migrate.js</span>
       </a>
     
@@ -540,10 +555,7 @@ pgMigrate
 
   <p>rollbacks all migrations</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>reset(): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></div>
-   
   
   
 
@@ -571,6 +583,8 @@ pgMigrate
   
 
   
+
+  
     <div class='py1 quiet mt1 prose-big'>Example</div>
     
       
@@ -580,6 +594,8 @@ pgMigrate
  .connect()
  .then(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> pgMigrate.reset());</pre>
     
+  
+
   
 
   
@@ -606,7 +622,7 @@ pgMigrate
   <div class='clearfix'>
     
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/urbica/pg-migrate/blob/22f400c2f57c9e205813d5c1a0d9362418a60dc0/pg-migrate.js#L241-L243'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/urbica/pg-migrate/blob/8e81a3238f50159d3b30b83ec9cbf62d0ea07f1a/pg-migrate.js#L242-L244'>
       <span>pg-migrate.js</span>
       </a>
     
@@ -615,10 +631,7 @@ pgMigrate
 
   <p>closes database connection</p>
 
- 
-  
     <div class='pre p1 fill-light mt0'>end(): <a href="https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise">Promise</a></div>
-   
   
   
 
@@ -646,6 +659,8 @@ pgMigrate
   
 
   
+
+  
     <div class='py1 quiet mt1 prose-big'>Example</div>
     
       
@@ -655,6 +670,8 @@ pgMigrate
  .connect()
  .then(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> pgMigrate.end());</pre>
     
+  
+
   
 
   
@@ -672,8 +689,11 @@ pgMigrate
   
 
   
+
+  
 </section>
 
+          
         
       </div>
     </div>
