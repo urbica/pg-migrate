@@ -55,7 +55,7 @@ const connection = (connectionString && parse(connectionString)) || {
   user: opt['--user'] || process.env.PGUSER || process.env.POSTGRES_USER,
   password:
     opt['--password'] || process.env.PGPASSWORD || process.env.POSTGRES_PASSWORD,
-  ssl: opt['--ssl'] || process.env.PGSSL || process.env.POSTGRES_SSL
+  ssl: opt['--ssl'] || process.env.PGSSL || process.env.POSTGRES_SSL,
 };
 
 const options = {
