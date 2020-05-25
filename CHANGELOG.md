@@ -1,6 +1,21 @@
-# Change Log
+# Changelog
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+## [1.2.0](https://github.com/urbica/pg-migrate/compare/v1.1.0...v1.2.0) (2020-05-25)
+
+
+### Bug Fixes
+
+* .snyk & package.json to reduce vulnerabilities ([2d516d2](https://github.com/urbica/pg-migrate/commit/2d516d2d71a9064c622b7dc9899f8a2d4fcdce79))
+* .snyk & package.json to reduce vulnerabilities ([d99c595](https://github.com/urbica/pg-migrate/commit/d99c595bec0f06f72f2ba26696a9d5eafebe4dfb))
+* .snyk & package.json to reduce vulnerabilities ([0c862c0](https://github.com/urbica/pg-migrate/commit/0c862c085eb759ed25731fa4045428bebc6e7bc3))
+* .snyk & package.json to reduce vulnerabilities ([7cf6401](https://github.com/urbica/pg-migrate/commit/7cf640135160bd5c13d3671f6b5800f22d01e9f8))
+* package.json & yarn.lock to reduce vulnerabilities ([94829b6](https://github.com/urbica/pg-migrate/commit/94829b64bf0c5cf029cced05cfe4f06630e13026))
+* **package:** update documentation to version 10.0.0 ([8b7d7c7](https://github.com/urbica/pg-migrate/commit/8b7d7c781cb5478c18d9e68b95b079e779dc7f06))
+* **package:** update documentation to version 11.0.0 ([8556767](https://github.com/urbica/pg-migrate/commit/8556767ee12fe0dd4116e93907c71c258509754b))
+* **package:** update dotenv to version 7.0.0 ([ab9062e](https://github.com/urbica/pg-migrate/commit/ab9062e67db8b993563a56d5b850968a923c7b09))
+* **package:** update dotenv to version 8.0.0 ([e1533c7](https://github.com/urbica/pg-migrate/commit/e1533c79a40b411ab12fc9da128bf29f04afd8de))
 
 <a name="1.1.0"></a>
 # [1.1.0](https://github.com/urbica/pg-migrate/compare/v1.0.3...v1.1.0) (2019-01-25)
