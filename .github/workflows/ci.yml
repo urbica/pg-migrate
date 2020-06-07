@@ -20,11 +20,9 @@ jobs:
           POSTGRES_DB: test
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
+        ports:
+          - 5432/tcp
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
 
     steps:
       - name: Check out repository code
@@ -40,7 +38,7 @@ jobs:
         run: npm test
         env:
           POSTGRES_DB: test
-          POSTGRES_HOST: postgres
-          POSTGRES_PORT: 5432
+          POSTGRES_HOST: localhost
+          POSTGRES_PORT: ${{ job.services.postgres.ports[5432] }}
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
