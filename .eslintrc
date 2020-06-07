@@ -6,13 +6,6 @@
     "node": true
   },
   "rules": {
-    "arrow-parens": [
-      "warn",
-      "as-needed",
-      {
-        "requireForBlockBody": true
-      }
-    ],
     "comma-dangle": ["error", "never"],
     "function-paren-newline": ["error", "consistent"],
     "max-len": [
