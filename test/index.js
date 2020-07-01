@@ -45,7 +45,13 @@ test('migrate', async t => {
   await pgMigrate.migrate();
   await pgMigrate.end();
 
-  const db = pgp({ database, user });
+  const db = pgp({
+    host,
+    port,
+    database,
+    user,
+    password
+  });
 
   await db
     .oneOrNone(tableExistsQuery, { schemaName, tableName })
