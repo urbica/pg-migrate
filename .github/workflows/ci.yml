@@ -33,6 +33,9 @@ jobs:
       - name: Run linter
         run: npm run lint
 
+      - name: Debug
+        run: echo ${{ job.services.postgres.ports[5432] }}
+
       - name: Run tests
         run: npm test
         env:
