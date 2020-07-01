@@ -71,12 +71,26 @@ test('migrate', async t => {
 test('rollback', async t => {
   t.plan(3);
 
-  const pgMigrate = new PgMigrate({ database, user, migrationsDir });
+  const pgMigrate = new PgMigrate({
+    host,
+    port,
+    database,
+    user,
+    password,
+    migrationsDir
+  });
+
   await pgMigrate.connect();
   await pgMigrate.rollback();
   await pgMigrate.end();
 
-  const db = pgp({ database, user });
+  const db = pgp({
+    host,
+    port,
+    database,
+    user,
+    password
+  });
 
   await db
     .oneOrNone(tableExistsQuery, { schemaName, tableName })
@@ -96,12 +110,26 @@ test('rollback', async t => {
 test('reset', async t => {
   t.plan(3);
 
-  const pgMigrate = new PgMigrate({ database, user, migrationsDir });
+  const pgMigrate = new PgMigrate({
+    host,
+    port,
+    database,
+    user,
+    password,
+    migrationsDir
+  });
+
   await pgMigrate.connect();
   await pgMigrate.reset();
   await pgMigrate.end();
 
-  const db = pgp({ database, user });
+  const db = pgp({
+    host,
+    port,
+    database,
+    user,
+    password
+  });
 
   await db
     .oneOrNone(tableExistsQuery, { schemaName, tableName })
