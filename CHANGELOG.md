@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.2.1](https://github.com/urbica/pg-migrate/compare/v1.2.0...v1.2.1) (2020-07-02)
+
+
+### Bug Fixes
+
+* fix cli ssl option parsing ([#158](https://github.com/urbica/pg-migrate/issues/158)) ([2e560f1](https://github.com/urbica/pg-migrate/commit/2e560f137ee1ac955972ed8539359c96334f6816)), closes [#157](https://github.com/urbica/pg-migrate/issues/157)
+
 ## [1.2.0](https://github.com/urbica/pg-migrate/compare/v1.1.0...v1.2.0) (2020-05-25)
 
 
