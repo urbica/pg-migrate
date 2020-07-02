@@ -14,14 +14,6 @@ const database = process.env.POSTGRES_DB;
 const user = process.env.POSTGRES_USER;
 const password = process.env.POSTGRES_PASSWORD;
 
-console.log('debug', {
-  host,
-  port,
-  database,
-  user,
-  password
-});
-
 const schemaName = 'public';
 const tableName = 'migrations';
 const migrationsDir = path.join(__dirname, './migrations');
