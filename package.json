@@ -61,7 +61,7 @@
     "prettier": "^1.19.1",
     "prettier-eslint": "^9.0.1",
     "prettier-eslint-cli": "^5.0.0",
-    "standard-version": "^7.1.0",
+    "standard-version": "^8.0.1",
     "tape": "^4.13.0"
   },
   "husky": {
