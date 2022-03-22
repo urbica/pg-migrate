@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.2.2](https://github.com/urbica/pg-migrate/compare/v1.2.1...v1.2.2) (2022-03-22)
+
+
+### Bug Fixes
+
+* package.json to reduce vulnerabilities ([ac7164d](https://github.com/urbica/pg-migrate/commit/ac7164d43dc24678245d6b6ad53ee7ef463a9ebd))
+
 ### [1.2.1](https://github.com/urbica/pg-migrate/compare/v1.2.0...v1.2.1) (2020-07-02)
 
 
