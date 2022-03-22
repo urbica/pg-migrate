@@ -2,7 +2,7 @@
 
 [![npm version](https://img.shields.io/npm/v/@urbica/pg-migrate.svg)](https://www.npmjs.com/package/@urbica/pg-migrate)
 [![npm downloads](https://img.shields.io/npm/dt/@urbica/pg-migrate.svg)](https://www.npmjs.com/package/@urbica/pg-migrate)
-[![Build Status](https://travis-ci.org/urbica/pg-migrate.svg?branch=master)](https://travis-ci.org/urbica/pg-migrate)
+[![CI](https://github.com/urbica/pg-migrate/workflows/CI/badge.svg)](https://github.com/urbica/pg-migrate/actions)
 
 PostgreSQL migration tool.
 
