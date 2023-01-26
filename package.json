@@ -43,7 +43,7 @@
     "docopt": "^0.6.2",
     "documentation": "13.2.5",
     "dotenv": "16.0.0",
-    "gh-pages": "3.2.3",
+    "gh-pages": "5.0.0",
     "pg-connection-string": "2.5.0",
     "pg-monitor": "1.4.1",
     "pg-promise": "10.11.1",
